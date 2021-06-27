@@ -1,5 +1,5 @@
 current directory: /Users/salley/projects/freelencing/itranscript new/vendor/ruby/3.0.0/gems/ffi-1.15.3/ext/ffi_c
-/Users/salley/.rbenv/versions/3.0.0/bin/ruby -I /Users/salley/.rbenv/versions/3.0.0/lib/ruby/3.0.0 -r ./siteconf20210627-27064-156uow.rb extconf.rb
+/Users/salley/.rbenv/versions/3.0.0/bin/ruby -I /Users/salley/.rbenv/versions/3.0.0/lib/ruby/3.0.0 -r ./siteconf20210627-62661-viyukq.rb extconf.rb
 checking for ffi_prep_closure_loc() in -lffi... no
 checking for ffi_prep_closure_loc() in -llibffi... no
 checking for ffi_prep_closure_loc() in -llibffi-8... no
