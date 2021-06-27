@@ -1,9 +1,9 @@
 current directory: /Users/salley/projects/freelencing/itranscript new/vendor/ruby/3.0.0/gems/ffi-1.15.3/ext/ffi_c
-/Users/salley/.rbenv/versions/3.0.0/bin/ruby -I /Users/salley/.rbenv/versions/3.0.0/lib/ruby/3.0.0 -r ./siteconf20210627-62661-viyukq.rb extconf.rb
-checking for ffi_prep_closure_loc() in -lffi... no
-checking for ffi_prep_closure_loc() in -llibffi... no
-checking for ffi_prep_closure_loc() in -llibffi-8... no
-checking for whether -Wl,--exclude-libs,ALL is accepted as LDFLAGS... no
+/Users/salley/.rbenv/versions/3.0.0/bin/ruby -I /Users/salley/.rbenv/versions/3.0.0/lib/ruby/3.0.0 -r ./siteconf20210627-7489-tsuthi.rb extconf.rb
+checking for ffi_prep_closure_loc() in -lffi... yes
+checking for ffi_prep_cif_var()... yes
+checking for ffi_raw_call()... yes
+checking for ffi_prep_raw_closure()... yes
 checking for whether -pthread is accepted as LDFLAGS... yes
 creating extconf.h
 creating Makefile
@@ -13,8 +13,31 @@ make "DESTDIR=" clean
 
 current directory: /Users/salley/projects/freelencing/itranscript new/vendor/ruby/3.0.0/gems/ffi-1.15.3/ext/ffi_c
 make "DESTDIR="
-/bin/sh: -c: line 0: unexpected EOF while looking for matching `"'
-/bin/sh: -c: line 1: syntax error: unexpected end of file
-make: *** ["/Users/salley/projects/freelencing/itranscript] Error 2
+compiling AbstractMemory.c
+compiling ArrayType.c
+compiling Buffer.c
+compiling Call.c
+compiling ClosurePool.c
+compiling DynamicLibrary.c
+compiling Function.c
+compiling FunctionInfo.c
+compiling LastError.c
+compiling LongDouble.c
+compiling MappedType.c
+compiling MemoryPointer.c
+compiling MethodHandle.c
+compiling Platform.c
+compiling Pointer.c
+compiling Struct.c
+compiling StructByValue.c
+compiling StructLayout.c
+compiling Thread.c
+compiling Type.c
+compiling Types.c
+compiling Variadic.c
+compiling ffi.c
+linking shared-object ffi_c.bundle
 
-make failed, exit code 2
+current directory: /Users/salley/projects/freelencing/itranscript new/vendor/ruby/3.0.0/gems/ffi-1.15.3/ext/ffi_c
+make "DESTDIR=" install
+/usr/bin/install -c -m 0755 ffi_c.bundle ./.gem.20210627-7489-gsfaer

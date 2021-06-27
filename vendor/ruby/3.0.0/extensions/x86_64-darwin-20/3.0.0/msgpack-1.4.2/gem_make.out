@@ -1,5 +1,5 @@
 current directory: /Users/salley/projects/freelencing/itranscript new/vendor/ruby/3.0.0/gems/msgpack-1.4.2/ext/msgpack
-/Users/salley/.rbenv/versions/3.0.0/bin/ruby -I /Users/salley/.rbenv/versions/3.0.0/lib/ruby/3.0.0 -r ./siteconf20210627-62661-huuu19.rb extconf.rb
+/Users/salley/.rbenv/versions/3.0.0/bin/ruby -I /Users/salley/.rbenv/versions/3.0.0/lib/ruby/3.0.0 -r ./siteconf20210627-7489-uyedxc.rb extconf.rb
 checking for ruby/st.h... yes
 checking for st.h... no
 checking for rb_str_replace() in ruby.h... yes
@@ -53,4 +53,4 @@ linking shared-object msgpack/msgpack.bundle
 
 current directory: /Users/salley/projects/freelencing/itranscript new/vendor/ruby/3.0.0/gems/msgpack-1.4.2/ext/msgpack
 make "DESTDIR=" install
-/usr/bin/install -c -m 0755 msgpack.bundle ./.gem.20210627-62661-zrvas4/msgpack
+/usr/bin/install -c -m 0755 msgpack.bundle ./.gem.20210627-7489-vqzk0j/msgpack

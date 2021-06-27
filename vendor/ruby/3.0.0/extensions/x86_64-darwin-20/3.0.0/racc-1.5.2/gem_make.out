@@ -1,5 +1,5 @@
 current directory: /Users/salley/projects/freelencing/itranscript new/vendor/ruby/3.0.0/gems/racc-1.5.2/ext/racc/cparse
-/Users/salley/.rbenv/versions/3.0.0/bin/ruby -I /Users/salley/.rbenv/versions/3.0.0/lib/ruby/3.0.0 -r ./siteconf20210627-62661-nne4n1.rb extconf.rb
+/Users/salley/.rbenv/versions/3.0.0/bin/ruby -I /Users/salley/.rbenv/versions/3.0.0/lib/ruby/3.0.0 -r ./siteconf20210627-7489-zfctah.rb extconf.rb
 checking for rb_ary_subseq()... yes
 creating Makefile
 
@@ -13,4 +13,4 @@ linking shared-object racc/cparse.bundle
 
 current directory: /Users/salley/projects/freelencing/itranscript new/vendor/ruby/3.0.0/gems/racc-1.5.2/ext/racc/cparse
 make "DESTDIR=" install
-/usr/bin/install -c -m 0755 cparse.bundle ./.gem.20210627-62661-aj3hi2/racc
+/usr/bin/install -c -m 0755 cparse.bundle ./.gem.20210627-7489-4hsxsc/racc
