@@ -1,0 +1,7 @@
+
+<%= form_for [Feedback.new] do |form| %>
+  <label class="block pt-4">Give Feedback</label>
+  <%= form.text_area :content, size: "40x10", class: "w-full border-2 border-dashed border-gray-300" %>
+  <%= form.hidden_field :user_id, value: @user.id %>
+  <%= form.submit "Send Feedback", class: "block bg-blue-500 py-2 px-4 text-md text-white rounded-md" %>
+<% end %>

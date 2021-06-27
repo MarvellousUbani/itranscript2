@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Itranscript</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  
+  </head>
+
+  <body>
+  <p class="notice bg-blue-100 text-center"><%= notice %></p>
+  <p class="alert bg-yellow-50 text-center"><%= alert %></p>
+
+    <%= yield %>
+    <script src="https://js.paystack.co/v1/inline.js"></script>
+  </body>
+</html>

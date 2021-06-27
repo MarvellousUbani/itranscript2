@@ -1,0 +1,44 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+ 
+ .payment-box select{
+    height: 37px;
+    padding: 0 1rem;
+    outline: none;
+    background: #000;
+    color: #fff;
+  }
+   
+  .payment-box .heading{
+    font-size: 1.7rem;
+    font-weight: 600;
+    line-height: 1.4em;
+    margin-bottom: 1rem;
+  }
+  
+  .payment-box .send-title{
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+    font-weight: 600;
+  }
+  
+  .payment-process-btn{
+    border-radius: 0;
+    font-size: 1rem;
+    position: relative;
+    top: -2px;
+  }

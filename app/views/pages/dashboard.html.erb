@@ -1,0 +1,561 @@
+<% unless current_user.admin? %>
+<% if current_user.payment_status? %>
+<div>
+<nav class="bg-gray-50">
+  <div class="w-full mx-auto px-4 sm:px-6 lg:px-12">
+    <div class="flex items-center justify-between h-16">
+      <div class="flex items-center">
+        <div class="flex-shrink-0">
+          <a href="/"><img class="h-8 w-8" src="https://www.dailyschoolnews.com.ng/wp-content/uploads/2017/09/UNIPORT.png" alt="Workflow"></a>
+        </div>
+        <div class="hidden md:block">
+          <div class="ml-10 flex items-baseline space-x-4">
+            <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
+            <a href="#" class="bg-blue-500 text-white px-3 py-2 rounded-md text-sm font-medium">Applicant Area</a>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="hidden md:block">
+        <div class="ml-4 flex items-center md:ml-6">
+          <button class="bg-blue-500 p-1 rounded-full text-gray-100 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
+            <span class="sr-only">View notifications</span>
+            <!-- Heroicon name: outline/bell -->
+            <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+            </svg>
+          </button>
+
+          <!-- Profile dropdown -->
+          <div class="ml-3 relative">
+            <div>
+              <button class="max-w-xs bg-gray-800 rounded-full flex items-center text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white" id="user-menu" aria-haspopup="true">
+                <span class="sr-only">Open user menu</span>
+
+                <% if current_user.avatar.attached? %>
+                <%= image_tag current_user.avatar.variant(resize: "100x100!"), class: "h-8 w-8 rounded-full"%>
+               <% else %>
+                <%= image_tag gravatar_image_url(current_user.email) %>
+               <% end %>
+              </button>
+            </div>
+            <!--
+              Profile dropdown panel, show/hide based on dropdown state.
+
+              Entering: "transition ease-out duration-100"
+                From: "transform opacity-0 scale-95"
+                To: "transform opacity-100 scale-100"
+              Leaving: "transition ease-in duration-75"
+                From: "transform opacity-100 scale-100"
+                To: "transform opacity-0 scale-95"
+            -->
+            <div class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5" role="menu" aria-orientation="vertical" aria-labelledby="user-menu">
+
+              <%= link_to "Sign Out", destroy_user_session_path, :method => :delete, :data => { :no_turbolink => true }, class: "block px-3 py-2 rounded-md text-base font-medium text-gray-400 hover:text-white hover:bg-gray-700" %>
+               
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="-mr-2 flex md:hidden">
+        <!-- Mobile menu button -->
+        <button type="button" class="bg-gray-800 inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white" aria-controls="mobile-menu" aria-expanded="false">
+          <span class="sr-only">Open main menu</span>
+          <!--
+            Heroicon name: outline/menu
+
+            Menu open: "hidden", Menu closed: "block"
+          -->
+          <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+          <!--
+            Heroicon name: outline/x
+
+            Menu open: "block", Menu closed: "hidden"
+          -->
+          <svg class="hidden h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile menu, show/hide based on menu state. -->
+  <div class="md:hidden" id="mobile-menu">
+    <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+      <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
+      <a href="#" class="bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium">Applicant Area</a>
+
+    </div>
+    <div class="pt-4 pb-3 border-t border-gray-700">
+      <div class="flex items-center px-5">
+        <div class="flex-shrink-0">
+          <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
+        </div>
+        <div class="ml-3">
+          <div class="text-base font-medium leading-none text-white"><%= current_user.first_name %></div>
+          <div class="text-sm font-medium leading-none text-gray-400"><%= current_user.email %></div>
+        </div>
+        <button class="ml-auto bg-gray-800 flex-shrink-0 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
+          <span class="sr-only">View notifications</span>
+          <!-- Heroicon name: outline/bell -->
+          <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+          </svg>
+        </button>
+      </div>
+      <div class="mt-3 px-2 space-y-1">
+      <%= link_to "Sign Out", destroy_user_session_path, :method => :delete, :data => { :no_turbolink => true }, class: "block px-3 py-2 rounded-md text-base font-medium text-gray-400 hover:text-white hover:bg-gray-700" %>
+               
+      </div>
+    </div>
+  </div>
+</nav>
+
+
+<main>
+  <div class="w-full mx-auto py-6 sm:px-6 lg:px-8 flex flex-row">
+    <!-- Replace with your content -->
+    <!-- This example requires Tailwind CSS v2.0+ -->
+<div class="bg-white overflow-hidden w-2/3">
+<div class="px-4 py-5 sm:px-6">
+  <h3 class="text-lg leading-6 font-medium text-gray-900">
+    Applicant Information
+  </h3>
+  <p class="mt-1 max-w-2xl text-sm text-gray-500">
+    Personal details and application.
+  </p>
+</div>
+<div class="border-t border-gray-200">
+  <dl>
+    <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+      <dt class="text-sm font-medium text-gray-500">
+        Full name
+      </dt>
+      <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+      <%= current_user.first_name %> <%= current_user.last_name %>
+      </dd>
+    </div>
+    <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+      <dt class="text-sm font-medium text-gray-500">
+        Application for
+      </dt>
+      <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+        ITranscript
+      </dd>
+    </div>
+    <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+      <dt class="text-sm font-medium text-gray-500">
+        Email address
+      </dt>
+      <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+      <%= current_user.email %>
+      </dd>
+    </div>
+    <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+      <dt class="text-sm font-medium text-gray-500">
+       Phone Number
+      </dt>
+      <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+      <%= current_user.phone_number %>
+      </dd>
+    </div>
+    <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+      <dt class="text-sm font-medium text-gray-500">
+        Matriculation Number
+      </dt>
+      <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+      <%= current_user.matriculation_number %>
+      </dd>
+    </div>
+    <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+      <dt class="text-sm font-medium text-gray-500">
+       Street Address
+      </dt>
+      <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+      <%= current_user.street_address %>
+      </dd>
+    </div>
+    <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+      <dt class="text-sm font-medium text-gray-500">
+        You would like to send your Itranscript to:
+      </dt>
+      <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+      <%= current_user.institution_sent %>
+      </dd>
+    </div>
+
+    <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+      <dt class="text-sm font-medium text-gray-500">
+        Department
+      </dt>
+      <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+      <%= current_user.department %>
+      </dd>
+    </div>
+
+    <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+      <dt class="text-sm font-medium text-gray-500">
+        Faculty
+      </dt>
+      <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+      <%= current_user.faculty %>
+      </dd>
+    </div>
+
+    <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+    <dt class="text-sm font-medium text-gray-500">
+      Senate Meeting No.
+    </dt>
+    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+    <%= current_user.senate_meeting_no %>
+    </dd>
+  </div>
+
+  <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+    <dt class="text-sm font-medium text-gray-500">
+      Date of Award
+    </dt>
+    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+    <%= current_user.date_of_award %>
+    </dd>
+  </div>
+
+  <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+    <dt class="text-sm font-medium text-gray-500">
+      Date of Birth
+    </dt>
+    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+    <%= current_user.date_of_birth %>
+    </dd>
+  </div>
+
+
+    <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+      <dt class="text-sm font-medium text-gray-500">
+        Uploaded Documents
+      </dt>
+      <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+        <ul class="border border-gray-200 rounded-md divide-y divide-gray-200">
+          <li class="pl-3 pr-4 py-3 flex items-center justify-between text-sm">
+            <div class="w-0 flex-1 flex items-center">
+              <!-- Heroicon name: solid/paper-clip -->
+              <svg class="flex-shrink-0 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                <path fill-rule="evenodd" d="M8 4a3 3 0 00-3 3v4a5 5 0 0010 0V7a1 1 0 112 0v4a7 7 0 11-14 0V7a5 5 0 0110 0v4a3 3 0 11-6 0V7a1 1 0 012 0v4a1 1 0 102 0V7a3 3 0 00-3-3z" clip-rule="evenodd" />
+              </svg>
+              <span class="ml-2 flex-1 w-0 truncate">
+              <% if current_user.upload.attached? %>
+                <%= current_user.upload.filename %>
+              <% end %>
+              </span>
+            </div>
+            <div class="ml-4 flex-shrink-0">
+              <a href="<%= url_for(current_user.upload) %>" class="font-medium text-indigo-600 hover:text-indigo-500">
+                View
+              </a>
+              
+            </div>
+          </li>
+          
+        </ul>
+      </dd>
+    </div>
+    
+
+    
+  </dl>
+</div>
+</div>
+
+<div class="status-area w-1/3 mt-16 p-8">
+Status : 
+<% if current_user.application_status? %>
+<span class="bg-green-300 text-black px-4 py-2 text-sm rounded-md">Approved/Sent</span>
+<% else %>
+<span class="bg-yellow-500 text-white px-4 py-2 text-sm rounded-md">Under Review</span>
+<% end %>
+
+<div class="feedback-box border-2 border-dashed border-gray-300 my-4 p-4 my-4">
+  <h4 class="font-medium">Feedback</h4>
+  <% unless @feedbacks %>
+  <p class="py-4">No Feedback given.</p>
+  <% else %>
+  <%= render @feedbacks %>
+  <% end %>
+</div>
+<div class="edit-access-box">
+  <p class="py-4 text-sm">Want to Change Your Information Details?</p>
+  <button class="bg-blue-500 py-2 px-4 text-md text-white rounded-md" onclick='(function(){
+    document.getElementById("request-notif").innerHTML = "Request Sent Succesfully!"})()'>Request Edit Access</button>
+  <p id="request-notif" class="py-2"></p>
+</div>
+</div>
+    <!-- /End replace -->
+  </div>
+
+</main>
+</div>
+
+
+<% else %>
+<div class="payment-box">
+  <h3>Continue Payment</h3>
+  <div id="userName"><%= current_user.first_name %></div>
+  <div id="userEmail"><%= current_user.email %></div>
+  <div id="userPhone"><%= current_user.phone_number %></div>
+  <h3>Where are you sending to? </h3>
+  <select id="location-sent" required>
+  <option selected value='none'>Select Location</option>
+  <option  value="within">Within Nigeria</option>
+  <option value="outside">Outside Nigeria</option>
+  </select>
+
+
+  <select id="within-nigeria" class="hidden">
+  <option selected value='none'>Select State</option>
+  <option value="lagos">Lagos</option>
+  <option value="abuja">Abuja</option>
+  <option value="portharcourt">Portharcourt</option>
+  </select>
+
+  <select id="outside-nigeria" class="hidden">
+  <option selected value='none'>Select Country</option>
+  <option value="usa">United States</option>
+  <option value="canada">Canada</option>
+  <option value="china">China</option>
+  <option value="australia">Australia</option>
+  <option value="ghana">Ghana</option>
+  </select>
+
+
+
+  <a class="payment-process-btn inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"  onclick="payWithPaystack()"> Process Payment</a>
+  
+</div>
+  <% end %>
+
+
+<% else %>
+
+<!-- This example requires Tailwind CSS v2.0+ -->
+<div>
+    <nav class="bg-gray-50">
+      <div class="w-full mx-auto px-4 sm:px-6 lg:px-12">
+        <div class="flex items-center justify-between h-16">
+          <div class="flex items-center">
+            <div class="flex-shrink-0">
+              <a href="/"><img class="h-8 w-8" src="https://www.dailyschoolnews.com.ng/wp-content/uploads/2017/09/UNIPORT.png" alt="Workflow"></a>
+            </div>
+            <div class="hidden md:block">
+              <div class="ml-10 flex items-baseline space-x-4">
+                <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
+                <a href="#" class="bg-blue-500 text-white px-3 py-2 rounded-md text-sm font-medium">Admin Area</a>
+                <% if current_user.super_admin   %>
+                <a href="/dashboard/edit_users" class="bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium">Edit Users</a>
+                <% end  %>
+    
+              </div>
+            </div>
+          </div>
+          <div class="hidden md:block">
+            <div class="ml-4 flex items-center md:ml-6">
+              <button class="bg-blue-500 p-1 rounded-full text-gray-100 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
+                <span class="sr-only">View notifications</span>
+                <!-- Heroicon name: outline/bell -->
+                <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+                </svg>
+              </button>
+  
+              <!-- Profile dropdown -->
+              <div class="ml-3 relative">
+                <div>
+                  <button class="max-w-xs bg-gray-800 rounded-full flex items-center text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white" id="user-menu" aria-haspopup="true">
+                    <span class="sr-only">Open user menu</span>
+                    <% if current_user.avatar.attached? %>
+                        <%= image_tag current_user.avatar.variant(resize: "100x100!"), class: "h-8 w-8 rounded-full"%>
+                    <% else %>
+                        <%= image_tag gravatar_image_url(current_user.email) %>
+                    <% end %>
+                  </button>
+                </div>
+                <!--
+                  Profile dropdown panel, show/hide based on dropdown state.
+  
+                  Entering: "transition ease-out duration-100"
+                    From: "transform opacity-0 scale-95"
+                    To: "transform opacity-100 scale-100"
+                  Leaving: "transition ease-in duration-75"
+                    From: "transform opacity-100 scale-100"
+                    To: "transform opacity-0 scale-95"
+                -->
+                <div class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5" role="menu" aria-orientation="vertical" aria-labelledby="user-menu">
+  
+                  <%= link_to "Sign Out", destroy_user_session_path, :method => :delete, :data => { :no_turbolink => true }, class: "block px-3 py-2 rounded-md text-base font-medium text-gray-400 hover:text-white hover:bg-gray-700" %>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="-mr-2 flex md:hidden">
+            <!-- Mobile menu button -->
+            <button type="button" class="bg-gray-800 inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white" aria-controls="mobile-menu" aria-expanded="false">
+              <span class="sr-only">Open main menu</span>
+              <!--
+                Heroicon name: outline/menu
+  
+                Menu open: "hidden", Menu closed: "block"
+              -->
+              <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+              <!--
+                Heroicon name: outline/x
+  
+                Menu open: "block", Menu closed: "hidden"
+              -->
+              <svg class="hidden h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Mobile menu, show/hide based on menu state. -->
+      <div class="md:hidden" id="mobile-menu">
+        <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+          <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
+          <a href="#" class="bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium">Admin Area</a>
+          <% if current_user.super_admin   %>
+          <a href="/dashboard/edit_users" class="bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium">Edit Users</a>
+          <% end  %>
+  
+        </div>
+        <div class="pt-4 pb-3 border-t border-gray-700">
+          <div class="flex items-center px-5">
+            <div class="flex-shrink-0">
+              <img class="h-10 w-10 rounded-full" src="" alt="">
+            </div>
+            <div class="ml-3">
+              <div class="text-base font-medium leading-none text-white"><%= current_user.first_name %></div>
+              <div class="text-sm font-medium leading-none text-gray-400"><%= current_user.email %></div>
+            </div>
+            <button class="ml-auto bg-gray-800 flex-shrink-0 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
+              <span class="sr-only">View notifications</span>
+              <!-- Heroicon name: outline/bell -->
+              <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+              </svg>
+            </button>
+          </div>
+          <div class="mt-3 px-2 space-y-1">
+            
+          <%= link_to "Sign Out", destroy_user_session_path, :method => :delete, :data => { :no_turbolink => true }, class: "block px-3 py-2 rounded-md text-base font-medium text-gray-400 hover:text-white hover:bg-gray-700" %>
+  
+          </div>
+        </div>
+      </div>
+    </nav>
+  
+
+    <main>
+      <div class="w-full mx-auto py-6 sm:px-6 lg:px-8 flex flex-row">
+
+<div class="flex flex-col w-full">
+  <div class="w-full">
+  
+    <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+
+    <h2 class="text-blue-500 text-3xl py-4">Welcome <%= current_user.first_name %> </h2>
+    <p class="pb-8">On your dashboard, you may be able to see applicants, manually review their documents and approve if all matches the specified criteria </p>
+    
+
+      <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+       <table class="min-w-full divide-y divide-gray-200">
+          <thead class="bg-gray-50">
+            <tr>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Name
+              </th>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Institution Sending To
+              </th>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Status
+              </th>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Edit Request
+              </th>
+              <th scope="col" class="relative px-6 py-3">
+                <span class="sr-only">Edit</span>
+              </th>
+            </tr>
+          </thead>
+          <tbody class="bg-white divide-y divide-gray-200">
+          <% @users.each do|user| %>
+            <% unless user.admin? %>
+            <tr>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <div class="flex items-center">
+                  <div class="flex-shrink-0 h-10 w-10">
+                    <% if user.avatar.attached? %>
+                        <%= image_tag user.avatar.variant(resize: "100x100!"), class: "h-10 w-10 rounded-full"%>
+                    <% else %>
+                        <%= image_tag gravatar_image_url(user.email) %>
+                    <% end %>
+                  </div>
+                  <div class="ml-4">
+                    <div class="text-sm font-medium text-gray-900">
+                      <%= user.first_name %> <%= user.last_name %>
+                    </div>
+                    <div class="text-sm text-gray-500">
+                      <%= user.email %>
+                    </div>
+                  </div>
+                </div>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <div class="text-sm text-gray-900"><%= user.institution_sent %></div>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+              <% if user.application_status? %>
+                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                  Approved
+                </span>
+              <% else %>
+                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-gray-800">
+                  Under Review
+                </span>
+              <% end %>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                Yes
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                <%= link_to "Review", edit_user_path(user), :class => "text-indigo-600 hover:text-indigo-900" %>
+              </td>
+            </tr>
+          <% end %>
+          <% end %>
+            
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+    </div>
+  
+  
+        <!-- /End replace -->
+
+    </main>
+  </div>
+
+<% end %>

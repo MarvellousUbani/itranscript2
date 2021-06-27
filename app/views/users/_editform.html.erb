@@ -1,0 +1,14 @@
+<%= form_with model: @user do |f| %>  
+    <div class="block">
+     <%= f.label :application_status %>
+     <%= f.select :application_status, options_for_select([['Under Review', false], ['Approved', true]])%>
+     </div>
+   
+     <div class="block py-4">
+     <%= f.label :editable_status %>
+     <%= f.select :editable_status, options_for_select([['No', false], ['Yes', true]])%>
+     </div>
+   
+   
+     <%= f.submit "Update Applicant Status", class: "block bg-blue-500 py-2 px-4 text-md text-white rounded-md" %>
+   <% end %>
